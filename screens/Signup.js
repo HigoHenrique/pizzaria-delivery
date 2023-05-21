@@ -23,7 +23,7 @@ const Signup = () => {
     novoUser = {
       nome,
       email,
-      password,
+      senha: password,
     }
     try{
     await createUser(novoUser)

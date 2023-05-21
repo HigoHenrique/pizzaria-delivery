@@ -4,11 +4,13 @@ import { useNavigation } from '@react-navigation/native';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { getUsers } from '../api/user.js'
 import { createUser } from '../api/user.js'
+import useUser from '../contexts/userContext.js';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
+  const addUser = useUser(state => state.addUser);
 
   const { data } = useQuery({
     queryKey: ["users"],
@@ -22,10 +24,14 @@ const Login = () => {
   });
 
   const handleLogin = async () => {
-    const temUser = await data.results.find(user => { if (user.email === email && user.password === password) return user })
-    if (temUser) {
+    const user = await data.find(user => { if (user.email === email && user.senha === password) return user })
+    if (user) {
       setEmail('')
       setPassword('')
+      addUser({
+        nome: user.nome,
+        email: user.email
+      })
       navigation.navigate('Home');
     } else {
       setEmail('')
