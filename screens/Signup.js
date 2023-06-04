@@ -16,13 +16,16 @@ const Signup = () => {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const [endereco, setEndereco] = useState('')
+  const [telefone, setTelefone] = useState('')
   const navigation = useNavigation();
 
   const cadastrar = async () =>{
     novoUser = {
       nome,
       email,
+      endereco,
+      telefone,
       senha: password,
     }
     try{
@@ -56,6 +59,18 @@ const Signup = () => {
         value={password}
         secureTextEntry={true}
         placeholder="*********"
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={setEndereco}
+        value={endereco}
+        placeholder="Rua exemplo, N 101, Bairro "
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={setTelefone}
+        value={telefone}
+        placeholder="XX XXXXX-XXXX"
       />
       <Button
         title="Cadastrar"

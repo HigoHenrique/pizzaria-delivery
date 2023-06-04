@@ -1,20 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Container, Flex } from "native-base";
+import { Container, View } from "native-base";
 import useUser from '../contexts/userContext';
 import Header from '../components/Header';
+import ListPizzas from '../components/ListPizzas';
 
 const Home = () => {
   const user = useUser(state => state.user);
 
   return (
-    
-    <Container width='lg' justifyContent='center'>
+    <View justifyContent='center' py={10}>
       <Header nome={user.nome}/>
-      <Flex>
-        
-      </Flex>
-    </Container>
+      <ListPizzas />
+    </View>
   );
 };
 

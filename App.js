@@ -9,6 +9,7 @@ import Order from "./screens/Order";
 import Purchases from "./screens/Purchases";
 import { NativeBaseProvider } from "native-base";
 import HomeLogin from "./screens/HomeLogin";
+import ConfirmarPedido from "./screens/ConfirmarPedido";
 
 const queryClient = new QueryClient();
 const stack = createStackNavigator();
@@ -29,10 +30,13 @@ const App = () => {
                 headerShown: false,
               }}
             />
-            <stack.Screen name="Home" component={Home} />
+            <stack.Screen name="Home" component={Home} options={{
+             headerShown: false
+            }}/>
             <stack.Screen name="Signup" component={Signup} />
             <stack.Screen name="Order" component={Order} />
             <stack.Screen name="Purchases" component={Purchases} />
+            <stack.Screen name="ConfirmarPedido" component={ConfirmarPedido} />
           </stack.Navigator>
         </QueryClientProvider>
       </NavigationContainer>
