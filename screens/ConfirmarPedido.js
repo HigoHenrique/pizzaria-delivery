@@ -29,7 +29,7 @@ const ConfirmarPedido = () => {
       <Text style={styles.title}>Pedido: </Text>
       <Text style={styles.text}> {route.params.pizza_nome} </Text>
       <Text style={styles.text}>Valor: R$ {route.params.pizza_valor} </Text>
-      <Text>"/n"</Text>
+      <Text></Text>
 
       <View>
         <Text>Nome: {user.nome} </Text>
