@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import {
-  Text,
+  
   TextInput,
-  Button,
+  // Button,
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
@@ -12,14 +12,14 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { getUsers } from "../api/user.js";
 import { createUser } from "../api/user.js";
 import useUser from "../contexts/userContext.js";
-import { Input, Icon, Pressable, View } from "native-base";
+import { extendTheme ,Icon, Pressable ,Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
 
   const navigation = useNavigation();
   const addUser = useUser((state) => state.addUser);
@@ -36,17 +36,15 @@ const Login = () => {
   });
 
   const handleLogin = async () => {
-    const user = await data.find((user) => {
-      if (user.email === email && user.senha === password) return user;
-    });
+    const user = data.find(
+      (user) => user.email === email && user.senha === password
+    );
     if (user) {
       setEmail("");
       setPassword("");
       addUser({
         nome: user.nome,
         email: user.email,
-        telefone: user.telefone,
-        endereco: user.endereco,
       });
       navigation.navigate("Home");
     } else {
@@ -64,80 +62,192 @@ const Login = () => {
     navigation.navigate("Signup");
   };
 
-  return (
-    <View style={styles.container} bg="light.800">
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Login</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <Input
-          w={{
-            base: "85%",
-            md: "25%",
-          }}
-          InputLeftElement={
-            <Icon
-              as={<MaterialIcons name="person" />}
-              size={5}
-              ml="2"
-              color="muted.400"
-            />
-          }
-          variant="rounded"
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          my={2}
-        />
-        <Input
-          variant="rounded"
-          w={{
-            base: "85%",
-            md: "25%",
-          }}
-          type={show ? "text" : "password"}
-          InputRightElement={
-            <Pressable onPress={() => setShow(!show)}>
-              <Icon
-                as={
-                  <MaterialIcons
-                    name={show ? "visibility" : "visibility-off"}
-                  />
-                }
-                size={5}
-                mr="2"
-                color="muted.400"
-              />
-            </Pressable>
-          }
-          placeholder="Senha"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-        />
+  // return (
+  //   <ImageBackground
+  //     style={styles.background}
+  //     source={require("../assets/homebg2.jpg")}
+  //   >
+  //     <View>
+  //       <View style={{ height: "50%" }} py={120}>
+  //         <Text style={styles.title} color="coolGray.50">Login</Text>
+  //       </View>
+  //       <View style={styles.buttonContainer}>
+  //         <Input
+  //           w={{
+  //             base: "85%",
+  //             md: "25%",
+  //           }}
+  //           p={5}
+  //           InputLeftElement={
+  //             <Icon
+  //               as={<MaterialIcons name="person" />}
+  //               size={5}
+  //               ml="2"
+  //               color="muted.400"
+  //             />
+  //           }
+  //           variant="rounded"
+  //           placeholder="Email"
+  //           onChangeText={(text) => setEmail(text)}
+  //           value={email}
+  //           my={2}
+  //         />
+  //         <Input
+  //           variant="rounded"
+  //           w={{
+  //             base: "85%",
+  //             md: "25%",
+  //           }}
+  //           p={5}
+  //           type={show ? "text" : "password"}
+  //           InputRightElement={
+  //             <Pressable onPress={() => setShow(!show)}>
+  //               <Icon
+  //                 as={
+  //                   <MaterialIcons
+  //                     name={show ? "visibility" : "visibility-off"}
+  //                   />
+  //                 }
+  //                 size={5}
+  //                 mr="2"
+  //                 color="muted.400"
+  //               />
+  //             </Pressable>
+  //           }
+  //           placeholder="Senha"
+  //           value={password}
+  //           onChangeText={(text) => setPassword(text)}
+  //         />
 
-        <View style={styles.buttonView}>
-          <Button title="Entrar" onPress={handleLogin} />
-        </View>
-        <View style={styles.buttonView}>
-          <Button title="Sobre" onPress={handleLogin} />
-        </View>
-        <TouchableOpacity onPress={handleForgotPassword}>
-          <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSignUp}>
-          <Text style={styles.signUp} onPress={handleSignUp}>
-            Cadastre-se
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+  //         <View mx={5}>
+  //           <Button title="Entrar"
+  //             style={{ borderRadius: 15 }}
+  //             // w={{
+  //             //   base: "85%",
+  //             //   md: "25%",
+  //             // }}
+  //             my={2}
+  //             p={5}
+  //             bg="light.800"
+  //             onPress={handleLogin}
+  //           >
+  //           <Text color="white">Login</Text>
+  //           </Button>
+          
+  //           <Button title="Sobre"
+  //             style={{ borderRadius: 15 }}
+  //             // w={{
+  //             //   base: "85%",
+  //             //   md: "25%",
+  //             // }}
+  //             my={2}
+  //             p={5}
+  //             bg="light.800"
+  //             onPress={handleLogin}
+  //           >
+  //             <Text color="white">Sobre</Text>
+  //           </Button>
+  //         </View>
+  //         <TouchableOpacity onPress={handleForgotPassword}>
+  //           <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text>
+  //         </TouchableOpacity>
+  //         <TouchableOpacity onPress={handleSignUp}>
+  //           <Text style={styles.signUp} onPress={handleSignUp}>
+  //             Cadastre-se
+  //           </Text>
+  //         </TouchableOpacity>
+  //       </View>
+  //     </View>
+  //   </ImageBackground>
+  // );
+  return <Center w="100%">
+      <Box safeArea p="2" py="8" w="90%" maxW="290">
+        <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
+        color: "warmGray.50"
+      }}>
+          Bem-vindo
+        </Heading>
+        <Heading mt="1" _dark={{
+        color: "warmGray.200"
+      }} color="coolGray.600" fontWeight="medium" size="xs">
+          Faça login para continuar!
+        </Heading>
+
+        <VStack space={3} mt="5">
+          <FormControl>
+            <FormControl.Label>Email</FormControl.Label>
+            <Input 
+              InputLeftElement={
+                <Icon
+                  as={<MaterialIcons name="person" />}
+                  size={5}
+                  ml="2"
+                  color="muted.400"
+                />
+              }
+              // variant="rounded"
+              placeholder="Email"
+              onChangeText={(text) => setEmail(text)}
+              value={email}              
+            />
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Senha</FormControl.Label>
+            <Input type="password"
+              // variant="rounded"
+              InputRightElement={
+                <Pressable onPress={() => setShow(!show)}>
+                  <Icon
+                    as={
+                      <MaterialIcons
+                        name={show ? "visibility" : "visibility-off"}
+                      />
+                    }
+                    size={5}
+                    mr="2"
+                    color="muted.400"
+                  />
+                </Pressable>
+              }
+              placeholder="Senha"
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+            />
+            <Link _text={{
+            fontSize: "xs",
+            fontWeight: "500",
+            color: "indigo.500"
+          }} alignSelf="flex-end" mt="1">
+              Esqueceu a senha?
+            </Link>
+          </FormControl>
+          <Button mt="2" colorScheme="indigo" onPress={handleLogin}>
+            Logar
+          </Button>
+          <HStack mt="6" justifyContent="center">
+            <Text fontSize="sm" color="coolGray.600" _dark={{
+            color: "warmGray.200"
+          }}>
+              Eu sou um novo usuário.{" "}
+            </Text>
+            <Link _text={{
+            color: "indigo.500",
+            fontWeight: "medium",
+            fontSize: "sm"
+          }} onPress={handleSignUp}>
+              Cadastrar
+            </Link>
+          </HStack>
+        </VStack>
+      </Box>
+    </Center>;
 };
 
 const styles = StyleSheet.create({
   background: {
     flex: 1,
     resizeMode: "cover",
+    justifyContent: "center",
   },
   container: {
     flex: 1,
@@ -145,7 +255,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   titleContainer: {
     height: "50%",
@@ -153,18 +263,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 40,
-    fontWeight: "700",
-    marginBottom: 20,
-    color: "white",
-  },
-  input: {
-    height: 40,
-    width: "100%",
-    borderColor: "gray",
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    marginBottom: 20,
+    fontSize: 70,
+    height: 100,
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontWeight: "bold",
   },
   forgotPassword: {
     color: "blue",
