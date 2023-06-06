@@ -13,17 +13,17 @@ export default function ListPizzas({search}) {
   const [listaPizza, setListaPizza] = useState(data);
 
   useEffect(() =>{
-      const listaFiltrada = data.filter(pizza =>{ 
+      const listaFiltrada = data?.filter(pizza =>{ 
         const nomeDaPizza = pizza.pizza_nome.toLowerCase()
         const pesquisa = search.toLowerCase()
         if(nomeDaPizza.includes(pesquisa)){
           return pizza
         }})
         setListaPizza(listaFiltrada)
-    if(listaPizza.length === 0){
+    if(!listaPizza){
       setListaPizza(data)
     }
-  },[search])
+  },[search, data])
 
   if (error) {
     return (
