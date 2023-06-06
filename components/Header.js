@@ -1,17 +1,19 @@
-import { Box, Heading, Input, SearchIcon, StatusBar, Text } from "native-base";
+import { Box, Heading, Input, SearchIcon } from "native-base";
 
-export default function Header({ nome }) {
+export default function Header({ nome, search, setSearch }) {
+
   return (
     <Box
       flexDirection="row"
       alignItems="center"
-      borderColor="black"
-      borderWidth="2"
     >
       <Heading fontSize="lg" fontWeight="extrabold" marginX="8">
         Olá, {nome}
       </Heading>
       <Input
+        fontSize='md'
+        value={search}
+        onChangeText={setSearch}
         variant="unstyled"
         placeholder="buscar pizza"
         width="70%"

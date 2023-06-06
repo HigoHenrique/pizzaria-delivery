@@ -45,6 +45,8 @@ const Login = () => {
       addUser({
         nome: user.nome,
         email: user.email,
+        telefone: user.telefone,
+        endereco: user.endereco,
       });
       navigation.navigate("Home");
     } else {
