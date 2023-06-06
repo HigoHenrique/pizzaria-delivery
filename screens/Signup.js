@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState} from 'react'
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { Box, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider } from "native-base";
 import { createUser } from '../api/user.js'
 import { useNavigation } from '@react-navigation/native';
 import {useQuery} from '@tanstack/react-query';
@@ -37,48 +38,87 @@ const Signup = () => {
     }
   }
 
-  return (
-    <View style={styles.background}>
-    <View style={styles.container}>
-      <Text style={styles.title} >Cadastro: </Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={setNome}
-        value={nome}
-        placeholder="Nome"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={setEmail}
-        value={email}
-        placeholder="exemplo@email.com"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry={true}
-        placeholder="*********"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={setEndereco}
-        value={endereco}
-        placeholder="Rua exemplo, N 101, Bairro "
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={setTelefone}
-        value={telefone}
-        placeholder="XX XXXXX-XXXX"
-      />
-      <Button
-        title="Cadastrar"
-        onPress={cadastrar}
-      />
-    </View>
-    </View>
-  );
+  // return (
+  //   <View style={styles.background}>
+  //   <View style={styles.container}>
+  //     <Text style={styles.title} >Cadastro: </Text>
+  //     <TextInput
+  //       style={styles.input}
+  //       onChangeText={setNome}
+  //       value={nome}
+  //       placeholder="Nome"
+  //     />
+  //     <TextInput
+  //       style={styles.input}
+  //       onChangeText={setEmail}
+  //       value={email}
+  //       placeholder="exemplo@email.com"
+  //     />
+  //     <TextInput
+  //       style={styles.input}
+  //       onChangeText={setPassword}
+  //       value={password}
+  //       secureTextEntry={true}
+  //       placeholder="*********"
+  //     />
+  //     <TextInput
+  //       style={styles.input}
+  //       onChangeText={setEndereco}
+  //       value={endereco}
+  //       placeholder="Rua exemplo, N 101, Bairro "
+  //     />
+  //     <TextInput
+  //       style={styles.input}
+  //       onChangeText={setTelefone}
+  //       value={telefone}
+  //       placeholder="XX XXXXX-XXXX"
+  //     />
+  //     <Button
+  //       title="Cadastrar"
+  //       onPress={cadastrar}
+  //     />
+  //   </View>
+  //   </View>
+  // );
+  return <Center w="100%" h="88%">
+      <Box safeArea p="2" w="90%" maxW="290" py="1">
+        <Heading size="lg" color="coolGray.800" _dark={{
+        color: "warmGray.50"
+      }} fontWeight="semibold">
+          Bem-vindo
+        </Heading>
+        <Heading mt="1" color="coolGray.600" _dark={{
+        color: "warmGray.200"
+      }} fontWeight="medium" size="xs">
+          Cadastre-se para continuar!
+        </Heading>
+        <VStack space={3} mt="5">
+        <FormControl>
+            <FormControl.Label>Nome</FormControl.Label>
+            <Input placeholder="Nome" onChangeText={setNome}value={nome}/>
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Email</FormControl.Label>
+            <Input placeholder="exemplo@email.com" onChangeText={setEmail} value={email}/>
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Senha</FormControl.Label>
+            <Input type="password" placeholder="*********" onChangeText={setPassword} value={password}/>
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Endereço</FormControl.Label>
+            <Input placeholder="Rua exemplo, N 101, Bairro " onChangeText={setEndereco} value={endereco}/>
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Número de Telefone</FormControl.Label>
+            <Input placeholder="XX XXXXX-XXXX" onChangeText={setTelefone} value={telefone}/>
+          </FormControl>
+          <Button mt="2" colorScheme="indigo" onPress={cadastrar}>
+            Cadastrar
+          </Button>
+        </VStack>
+      </Box>
+    </Center>;
 };
 
 const styles = StyleSheet.create({
