@@ -50,7 +50,7 @@ const ConfirmarPedido = () => {
       </Box>
       <Modal visible={modalVisible} animationType='slide' transparent>
         <View style={styles.modalContainer}>
-        <Text style={styles.modalTitle}>Confirmação</Text>
+        {/* <Text style={styles.modalTitle}>Confirmação</Text> */}
           <Text style={styles.modalText}>Você tem certeza que quer confirmar o pedido?</Text>
           <View style={styles.modalButtonContainer}>
             <Button
@@ -98,25 +98,25 @@ const styles = StyleSheet.create({
   modalContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#d4d4d4',
+    backgroundColor: '#rgba(0, 0, 0, 0.8)',
     borderRadius: 10,
     borderWidth: 2,
     borderColor: 'black',
     width: '80%',
-    height: '30%',
+    height: '20%',
     alignSelf: 'center',
-    marginTop: '60%'
+    marginTop: '70%'
   },
-  modalTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'red',
-    marginBottom: 10,
-  },
+  // modalTitle: {
+  //   fontSize: 24,
+  //   fontWeight: 'bold',
+  //   color: 'red',
+  //   marginBottom: 10,
+  // },
   modalText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
     marginBottom: 20,
   },
   modalButtonContainer: {
