@@ -1,5 +1,5 @@
-import React from 'react';
-import {Text, StyleSheet, Linking, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { Text, StyleSheet, Linking, Alert, Modal, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Button, Box } from 'native-base';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -8,6 +8,7 @@ import useUser from '../contexts/userContext';
 const ConfirmarPedido = () => {
   const route = useRoute();
   const user = useUser(state => state.user);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleEnviarPedido = () => {
     const numeroWhatsApp = '+5581991988963'; // Número de exemplo fornecido
@@ -16,22 +17,25 @@ const ConfirmarPedido = () => {
 
     const url = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensagem)}`;
 
+    setModalVisible(true);
     Linking.openURL(url)
       .then(() => {
         console.log('Mensagem enviada com sucesso!');
+        setModalVisible(false);
       })
       .catch((error) => {
         console.error('Erro ao enviar a mensagem:', error);
-        Alert.alert('Erro ao enviar a mensagem')
+        Alert.alert('Erro ao enviar a mensagem');
+        setModalVisible(false);
       });
   };
 
   return (
     <Box style={styles.container}>
       <Box alignItems='center' marginY='5'>
-      <Text style={styles.title}>Pedido: </Text>
-      <Text style={styles.text}> {route.params.pizza_nome} </Text>
-      <Text style={styles.text}>Valor: R$ {route.params.pizza_valor} </Text>
+        <Text style={styles.title}>Pedido:</Text>
+        <Text style={styles.text}> {route.params.pizza_nome} </Text>
+        <Text style={styles.text}>Valor: R$ {route.params.pizza_valor} </Text>
       </Box>
       <Box alignItems='center' marginY='5'>
         <Text style={styles.user}>Nome: {user.nome} </Text>
@@ -40,8 +44,34 @@ const ConfirmarPedido = () => {
         <Text style={styles.user}>Endereco: {user.endereco ?? "Insira seu endereço"}</Text>
       </Box>
       <Box width='sm' height='md'>
-      <Button bg='blue.900' _text={{color:'white', fontSize:'20', fontWeight:'bold'}} onPress={handleEnviarPedido}>Enviar Pedido</Button>
+        <Button bg='blue.900' _text={{ color: 'white', fontSize: '20', fontWeight: 'bold' }} onPress={() => setModalVisible(true)}>
+          Enviar Pedido
+        </Button>
       </Box>
+      <Modal visible={modalVisible} animationType='slide' transparent>
+        <View style={styles.modalContainer}>
+        <Text style={styles.modalTitle}>Confirmação</Text>
+          <Text style={styles.modalText}>Você tem certeza que quer confirmar o pedido?</Text>
+          <View style={styles.modalButtonContainer}>
+            <Button
+              bg='red.500'
+              _text={{ color: 'white', fontSize: '16', fontWeight: 'bold' }}
+              onPress={() => setModalVisible(false)}
+              marginRight={2}
+            >
+              Cancelar
+            </Button>
+            <Button
+              bg='green.500'
+              _text={{ color: 'white', fontSize: '16', fontWeight: 'bold' }}
+              onPress={handleEnviarPedido}
+              marginLeft={2}
+            >
+              Enviar
+            </Button>
+          </View>
+        </View>
+      </Modal>
     </Box>
   );
 };
@@ -51,8 +81,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width:'100%',
-    height:'100%',
+    width: '100%',
+    height: '100%',
   },
   title: {
     fontSize: 40,
@@ -64,7 +94,34 @@ const styles = StyleSheet.create({
   user: {
     fontSize: 25,
     fontWeight: 'bold',
-  }
+  },
+  modalContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#d4d4d4',
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'black',
+    width: '80%',
+    height: '30%',
+    alignSelf: 'center',
+    marginTop: '60%'
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'red',
+    marginBottom: 10,
+  },
+  modalText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 20,
+  },
+  modalButtonContainer: {
+    flexDirection: 'row',
+  },
 });
 
 export default ConfirmarPedido;
