@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import {
-  
-  TextInput,
-  // Button,
-  TouchableOpacity,
   StyleSheet,
-  ImageBackground,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getUsers } from "../api/user.js";
 import { createUser } from "../api/user.js";
 import useUser from "../contexts/userContext.js";
-import { extendTheme ,Icon, Pressable ,Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
+import {Icon, Pressable ,Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center } from "native-base";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -45,6 +40,8 @@ const Login = () => {
       addUser({
         nome: user.nome,
         email: user.email,
+        telefone: user.telefone,
+        endereco: user.endereco,
       });
       navigation.navigate("Home");
     } else {
@@ -62,104 +59,6 @@ const Login = () => {
     navigation.navigate("Signup");
   };
 
-  // return (
-  //   <ImageBackground
-  //     style={styles.background}
-  //     source={require("../assets/homebg2.jpg")}
-  //   >
-  //     <View>
-  //       <View style={{ height: "50%" }} py={120}>
-  //         <Text style={styles.title} color="coolGray.50">Login</Text>
-  //       </View>
-  //       <View style={styles.buttonContainer}>
-  //         <Input
-  //           w={{
-  //             base: "85%",
-  //             md: "25%",
-  //           }}
-  //           p={5}
-  //           InputLeftElement={
-  //             <Icon
-  //               as={<MaterialIcons name="person" />}
-  //               size={5}
-  //               ml="2"
-  //               color="muted.400"
-  //             />
-  //           }
-  //           variant="rounded"
-  //           placeholder="Email"
-  //           onChangeText={(text) => setEmail(text)}
-  //           value={email}
-  //           my={2}
-  //         />
-  //         <Input
-  //           variant="rounded"
-  //           w={{
-  //             base: "85%",
-  //             md: "25%",
-  //           }}
-  //           p={5}
-  //           type={show ? "text" : "password"}
-  //           InputRightElement={
-  //             <Pressable onPress={() => setShow(!show)}>
-  //               <Icon
-  //                 as={
-  //                   <MaterialIcons
-  //                     name={show ? "visibility" : "visibility-off"}
-  //                   />
-  //                 }
-  //                 size={5}
-  //                 mr="2"
-  //                 color="muted.400"
-  //               />
-  //             </Pressable>
-  //           }
-  //           placeholder="Senha"
-  //           value={password}
-  //           onChangeText={(text) => setPassword(text)}
-  //         />
-
-  //         <View mx={5}>
-  //           <Button title="Entrar"
-  //             style={{ borderRadius: 15 }}
-  //             // w={{
-  //             //   base: "85%",
-  //             //   md: "25%",
-  //             // }}
-  //             my={2}
-  //             p={5}
-  //             bg="light.800"
-  //             onPress={handleLogin}
-  //           >
-  //           <Text color="white">Login</Text>
-  //           </Button>
-          
-  //           <Button title="Sobre"
-  //             style={{ borderRadius: 15 }}
-  //             // w={{
-  //             //   base: "85%",
-  //             //   md: "25%",
-  //             // }}
-  //             my={2}
-  //             p={5}
-  //             bg="light.800"
-  //             onPress={handleLogin}
-  //           >
-  //             <Text color="white">Sobre</Text>
-  //           </Button>
-  //         </View>
-  //         <TouchableOpacity onPress={handleForgotPassword}>
-  //           <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text>
-  //         </TouchableOpacity>
-  //         <TouchableOpacity onPress={handleSignUp}>
-  //           <Text style={styles.signUp} onPress={handleSignUp}>
-  //             Cadastre-se
-  //           </Text>
-  //         </TouchableOpacity>
-  //       </View>
-  //     </View>
-  //   </ImageBackground>
-  // );
   return <Center w="100%">
       <Box safeArea p="2" py="8" w="90%" maxW="290">
         <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
@@ -185,7 +84,6 @@ const Login = () => {
                   color="muted.400"
                 />
               }
-              // variant="rounded"
               placeholder="Email"
               onChangeText={(text) => setEmail(text)}
               value={email}              
@@ -194,7 +92,6 @@ const Login = () => {
           <FormControl>
             <FormControl.Label>Senha</FormControl.Label>
             <Input type="password"
-              // variant="rounded"
               InputRightElement={
                 <Pressable onPress={() => setShow(!show)}>
                   <Icon

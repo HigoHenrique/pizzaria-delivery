@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import {
   Alert,
   Box,
@@ -12,7 +12,7 @@ import {
   Center,
   NativeBaseProvider,
   IconButton,
-  CloseIcon // Importar o IconButton aqui
+  CloseIcon
 } from 'native-base';
 import { createUser } from '../api/user.js';
 import { useNavigation } from '@react-navigation/native';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button} from "native-base";
+import { View} from "native-base";
 import useUser from '../contexts/userContext';
 import Header from '../components/Header';
 import ListPizzas from '../components/ListPizzas';
@@ -11,10 +11,6 @@ const Home = () => {
 
 
   const handleLogout = () => {
-    // Implemente a lógica de logout aqui
-    // Por exemplo, limpar a sessão do usuário
-
-    // Navegar para a tela de login
     navigation.navigate("Login");
   };
 

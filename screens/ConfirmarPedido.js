@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { Text, StyleSheet, Linking, Alert, Modal, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Button, Box } from 'native-base';
-import { LinearGradient } from 'expo-linear-gradient';
 import useUser from '../contexts/userContext';
 
 const ConfirmarPedido = () => {
   const route = useRoute();
   const user = useUser(state => state.user);
   const [modalVisible, setModalVisible] = useState(false);
-
   const handleEnviarPedido = () => {
     const numeroWhatsApp = '+5581991988963'; // Número de exemplo fornecido
 
@@ -40,8 +38,8 @@ const ConfirmarPedido = () => {
       <Box alignItems='center' marginY='5'>
         <Text style={styles.user}>Nome: {user.nome} </Text>
         <Text style={styles.user}>Email: {user.email} </Text>
-        <Text style={styles.user}>Telefone: {user.telefone ?? "Insira seu telefone"}</Text>
-        <Text style={styles.user}>Endereco: {user.endereco ?? "Insira seu endereço"}</Text>
+        <Text style={styles.user}>Telefone: {user.telefone ?? "Insira seu endereço"}</Text>
+        <Text style={styles.user}>Endereco: {user.endereco ?? "Insira seu telefone"}</Text>
       </Box>
       <Box width='sm' height='md'>
         <Button bg='blue.900' _text={{ color: 'white', fontSize: '20', fontWeight: 'bold' }} onPress={() => setModalVisible(true)}>
@@ -107,12 +105,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '70%'
   },
-  // modalTitle: {
-  //   fontSize: 24,
-  //   fontWeight: 'bold',
-  //   color: 'red',
-  //   marginBottom: 10,
-  // },
   modalText: {
     fontSize: 20,
     fontWeight: 'bold',
